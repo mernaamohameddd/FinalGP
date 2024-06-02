@@ -1,0 +1,19 @@
+  curl.exe --data-binary '{"sourceCode": "israa"}' -H 'content-type: application/json;' http://localhost:3000/code/results
+# curl --request POST 'http://127.0.0.1:8000/analyze/go' \
+# --header 'Content-Type: application/json' \
+# --data-raw '{
+#     "html": "[PASTE_YOUR_CODE]",
+#     "threshold": {
+#         "cyclomatic_complexity": 200,
+#         "lines_of_code": 50,
+#         "parameter_count": 4
+#     }
+# }'
+#token of DeepCode: 5cf390ab-2a65-431f-8fe8-181f8f331959
+#ID: 2ed08fc8-e5e7-4fa9-9800-8a032bd0f06d
+# curl --location --request POST 'https://api.snyk.io/v1/' \
+# --header 'Content-Type:application/vnd.api+json' \
+# --header 'Authorization: 5cf390ab-2a65-431f-8fe8-181f8f331959' \
+# --data-raw '{
+#     "content": "YOUR_CODE_HERE"
+# }'

@@ -1,0 +1,9 @@
+# POST http://localhost:3000/code/testCode
+# Content-Type: application/json
+
+# {
+#     "sourceCode": "israa"
+
+# }
+
+  GET http://localhost:3000/code
