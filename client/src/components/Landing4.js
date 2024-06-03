@@ -272,9 +272,8 @@ const Landing4 = () => {
       const response = await axios.post('http://localhost:3001/code/CPlusFile', {
         sourceCode: code,
       });
-
-      
-      setClangAnalysis(response.data.clangResults.output);
+  
+      setClangAnalysis(response.data.clangResults.output || "Your Code is Correct, Compilation Successfully");
       
       toast.success('Clang analysis completed!');
     } catch (err) {
@@ -286,6 +285,7 @@ const Landing4 = () => {
       setProcessing(false);
     }
   };
+  
 
   //////////////////////////////ESLINT//////////////////////////////////////////////////
 
@@ -598,7 +598,7 @@ return (
       
       
         <div className="flex flex-col items-end">
-          
+          <CustomInput customInput={customInput} setCustomInput={setCustomInput} />
           <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
             <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Compile'}</button>
           </div>

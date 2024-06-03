@@ -558,7 +558,7 @@ return (
 
     <br />
     <h1 className="font-bold px-10 py-1 rounded-md bg-gray-100" style={{ fontFamily: 'Arial, sans-serif', fontSize: '2rem' }}>
-      Assignment 2: Display and Calculate the Average of an Array [1, 2, 3, 4, 5].
+      Assignment 1: Search a sorted array [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] for a target value 5.
     </h1>
     <br />
     <div className="flex flex-row">
@@ -573,15 +573,15 @@ return (
       <div className="flex flex-col w-full h-full justify-start items-end">
         <CodeEditorWindow code={code} onChange={onChange} language={language?.value} theme={theme.value} />
       </div>
-
+      
       <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-      <OutputWindow2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
-
-<OutputDetails2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
-<div className="flex flex-col items-end">
-          
+      <OutputWindow2 outputDetails={outputDetails} testCaseResult={testCaseResult} clangAnalysis={clangAnalysis} />
+      
+      
+        <div className="flex flex-col items-end">
+          <CustomInput customInput={customInput} setCustomInput={setCustomInput} />
           <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : ' Compile'}</button>
+            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Compile'}</button>
           </div>
           
           <div>
@@ -599,21 +599,9 @@ return (
       </div>
     </div>
     <>
-      <h4 style={{ fontWeight: 'bold', marginLeft: '20px', marginTop: '1px', fontSize: '1.4rem' }}>Solution Feedback</h4>
-      <div style={{ padding: '10px', background: '#f7f7f7', border: '1px solid #ddd' }}>
-        {clangAnalysis ? (
-          <pre>{clangAnalysis}</pre> // Display Clang error messages
-        ) : (
-          <p>No Clang analysis results to show yet.</p>
-       
-
-        )}
-      </div>
-      <div>
-        {/* Display output received from the backend */}
-        <h3>Output:</h3>
-        <pre>{output}</pre>
-      </div>
+      <h4 style={{ fontWeight: 'bold', marginLeft: '20px', marginTop: '1px', fontSize: '1.4rem' }}>Code Logic Feedback</h4>
+      <OutputDetails2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
+      
 
       <ToastContainer
         position="top-right"
