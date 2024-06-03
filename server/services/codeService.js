@@ -358,14 +358,7 @@ module.exports.extractBinarySearchFunction = async () => {
 };
 */
 
-module.exports.extractFilePathFromFeedback = (feedback) => {
-  const regex = /\( (.*?\.[a-zA-Z]+):/;
-  const match = feedback.match(regex);
-  if (match && match[1]) {
-    return match[1];
-  }
-  return null;
-};
+
 
 module.exports.covertCodeServiceCPlusPlus = async (codeInfo) => {
   try {
