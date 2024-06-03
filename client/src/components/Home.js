@@ -284,18 +284,19 @@ function Home() {
       navigate(`/Courses`);
     };*/
 
-    const courses = () => {
+    
+
+     /*const UserLevels = () => {
+      navigate(`/UserLevels`);
+     };*/
+
+     const courses = () => {
       navigate(`/signup`);
     };
 
     const UserLevels = () => {
       navigate(`/signup`);
      };
-
-     /*const UserLevels = () => {
-      navigate(`/UserLevels`);
-     };*/
-
      
     const homePageUrl = '/';
   const assignmentsUrl = '/Landing1';

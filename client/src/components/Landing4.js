@@ -7,10 +7,8 @@ import { languageOptions } from '../constants/languageOptions';
 import OutputWindow from './OutputWindow';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { defineTheme } from '../lib/defineTheme';
 import useKeyPress from '../hooks/useKeyPress';
-// import Footer from "./Footer";
 import OutputWindow2 from './OutputWindowCPlus';
 import CustomInput from './CustomInput';
 import OutputDetails2 from './OutputDetails2';
@@ -514,6 +512,11 @@ const Landing4 = () => {
     });
   };
 
+  const handleCombined = async () => {
+    await handleCPP();
+    await CppCode();
+  };
+
   const homePageUrl = '/';
   const assignmentsUrl = '/Landing1';
   const styles = `
@@ -600,8 +603,10 @@ return (
         <div className="flex flex-col items-end">
           <CustomInput customInput={customInput} setCustomInput={setCustomInput} />
           <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Compile'}</button>
+            <button onClick={handleCombined} disabled={processing}>{processing ? 'Processing...' : 'Compile'}</button>
           </div>
+
+         
           
           <div>
             <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
