@@ -1,9 +1,8 @@
-# POST http://localhost:3000/code/testCode
-# Content-Type: application/json
+POST http://localhost:3001/code/post
+Content-Type: application/json
 
-# {
-#     "sourceCode": "israa"
+{
+     "sourceCode": "testtt"
 
-# }
+ }
 
-  GET http://localhost:3000/code

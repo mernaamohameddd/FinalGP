@@ -358,6 +358,15 @@ module.exports.extractBinarySearchFunction = async () => {
 };
 */
 
+module.exports.extractFilePathFromFeedback = (feedback) => {
+  const regex = /\( (.*?\.[a-zA-Z]+):/;
+  const match = feedback.match(regex);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return null;
+};
+
 module.exports.covertCodeServiceCPlusPlus = async (codeInfo) => {
   try {
     const filename = 'temp.cpp';
@@ -374,8 +383,8 @@ module.exports.covertCodeServiceCPlusPlus = async (codeInfo) => {
     return new Promise((resolve, reject) => {
       exec(command, (error, stdout, stderr) => {
         if (error) {
-          const errorMsg = stderr || stdout || error.message;
-          reject(new Error(`Clang analysis failed: ${errorMsg}`)); // Return detailed error message
+          const errorMsg = extractErrorMessage(stderr || stdout || error.message);
+          reject(new Error(`Analysis failed, ${errorMsg}`)); // Return detailed error message
           return;
         }
 
@@ -387,6 +396,28 @@ module.exports.covertCodeServiceCPlusPlus = async (codeInfo) => {
     throw new Error('Failed to execute Clang analysis.');
   }
 };
+const extractErrorMessage = (errorMsg) => {
+  const regex = /temp\.cpp:(\d+):(\d+): error: (.*)/g;
+  let extractedErrors = '';
+  let match;
+  let isFirstError = true;
+  while ((match = regex.exec(errorMsg)) !== null) {
+    const lineNumber = match[1];
+    const columnNumber = match[2];
+    const errorMessage = match[3];
+    if (isFirstError) {
+      extractedErrors += 'Try to modify the error and recompile again:\n';
+      isFirstError = false;
+    }
+    extractedErrors += `${lineNumber}:${columnNumber} - ${errorMessage}\n`;
+  }
+  return extractedErrors.trim();
+};
+
+
+
+
+
 /*module.exports.runCppcheck = async () => {
   return new Promise((resolve) => {
    // const filename = 'temp.cpp';
@@ -512,7 +543,7 @@ module.exports.testCodeServiceCPlusPlus = async () => {
       exec(compileCommand, (error, stdout, stderr) => {
         if (error) {
           console.error('Compilation failed');
-          reject('Compilation failed');
+          reject('Compilation failed: ${stderr}');
         } else {
           console.log('Compilation successful');
           resolve();
@@ -527,14 +558,14 @@ module.exports.testCodeServiceCPlusPlus = async () => {
           console.error('Tests failed:', stderr);
           reject('Tests failed');
         } else {
-          console.log('Tests passed');
+          console.log('Code Logic Passed');
           console.log(stdout);  // Output the test results
           resolve(stdout);  // Return the stdout output
         }
       });
     });
 
-    return { success: true, message: 'Tests passed' };
+    return { success: true, message: 'Code Logic passed' };
   } catch (error) {
     return { success: false, message: error.message };
   }

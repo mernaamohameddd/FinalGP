@@ -7,16 +7,13 @@ int binarySearch(const int arr[], int size, int target) {
     while (left <= right) {
         int mid = left + (right - left) / 2;
 
-        if (arr[mid] < target) { // Wrong condition
+        if (arr[mid] == target) {
             return mid;  // Found the target at index mid
         }
-        else if (arr[mid] == target) { // Wrong condition
+        else if (arr[mid] < target
             left = mid + 1;  // Target is in the right half
         }
         else {
             right = mid - 1;  // Target is in the left half
         }
     }
-
-    return -1;  // Target not found in the array
-}
