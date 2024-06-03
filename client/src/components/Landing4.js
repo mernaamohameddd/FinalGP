@@ -11,9 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { defineTheme } from '../lib/defineTheme';
 import useKeyPress from '../hooks/useKeyPress';
 // import Footer from "./Footer";
-import OutputWindowCPlus from './OutputWindowCPlus';
+import OutputWindow2 from './OutputWindowCPlus';
 import CustomInput from './CustomInput';
-import OutputDetails from './OutputDetails';
+import OutputDetails2 from './OutputDetails2';
 import ThemeDropdown from './ThemeDropdown';
 import LanguagesDropdown from './LanguagesDropdown';
 
@@ -72,7 +72,7 @@ const Landing4 = () => {
   const [language, setLanguage] = useState(languageOptions[5]);
   const [clangLineNumbers,setClangLineNumbers]=useState(null);
   const [clangAnalysis, setClangAnalysis]=useState(null);
-  const [testCaseResult, setTestCaseResult] = useState();
+  const [testCaseResult, setTestCaseResult] = useState(null);
   const [data, setPlatoData] = useState(null);
   const [output, setOutput] = useState('');
   const enterPress = useKeyPress('Enter');
@@ -273,7 +273,9 @@ const Landing4 = () => {
         sourceCode: code,
       });
 
+      
       setClangAnalysis(response.data.clangResults.output);
+      
       toast.success('Clang analysis completed!');
     } catch (err) {
       console.error('Error during Clang analysis:', err);
@@ -450,24 +452,25 @@ const Landing4 = () => {
         throw new Error('Error running test cases');
       }
   
-      const { success, message } = await response.json();
+      const { success, message, errorLine } = await response.json();
   
       if (success) {
-        console.log('All tests passed');
+        console.log('Code Logic Passed');
         setTestCaseResult(true);
         setOutput(message);
-        showSuccessToast('All tests passed'); // Display success message
+        showSuccessToast('Code Logic Passed'); // Display success message
       } else {
-        console.log('Test case failed');
+        console.log('Code Logic Failed');
         setTestCaseResult(false);
-        setOutput(message);
-        showErrorToast('Test case failed'); // Display error message
+        setOutput(`Code Logic Failed`); // Display error message
+        showErrorToast(`Code Logic Failed`); // Display error message with error line
       }
     } catch (error) {
-      console.error('Error running test cases:', error);
-      showErrorToast('Error running test cases'); // Display error message
+      console.error('Error running code logic:', error);
+      showErrorToast('Error running code logic'); // Display error message
     }
   };
+  
   
   
   
@@ -589,22 +592,17 @@ return (
       <div className="flex flex-col w-full h-full justify-start items-end">
         <CodeEditorWindow code={code} onChange={onChange} language={language?.value} theme={theme.value} />
       </div>
-
+      
       <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-        <OutputWindow outputDetails={outputDetails} testCaseResult={testCaseResult} />
-
-        <OutputWindowCPlus outputDetails={outputDetails} testCaseResult={testCaseResult} />
+      <OutputWindow2 outputDetails={outputDetails} testCaseResult={testCaseResult} clangAnalysis={clangAnalysis} />
+      
+      
         <div className="flex flex-col items-end">
-          <CustomInput customInput={customInput} setCustomInput={setCustomInput} />
+          
           <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Analyze with Clang'}</button>
+            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Compile'}</button>
           </div>
-          <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleESLINTClick}>Code Style Feedback</button>
-          </div>
-          <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handlePlatoClick}>Analysis Report</button>
-          </div>
+          
           <div>
             <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
               <button onClick={handleTestCasesCPlusPlus}>Check the Logic</button>
@@ -620,21 +618,9 @@ return (
       </div>
     </div>
     <>
-      <h4 style={{ fontWeight: 'bold', marginLeft: '20px', marginTop: '1px', fontSize: '1.4rem' }}>Solution Feedback</h4>
-      <div style={{ padding: '10px', background: '#f7f7f7', border: '1px solid #ddd' }}>
-        {clangAnalysis ? (
-          <pre>{clangAnalysis}</pre> // Display Clang error messages
-        ) : (
-          <p>No Clang analysis results to show yet.</p>
-       
-
-        )}
-      </div>
-      <div>
-        {/* Display output received from the backend */}
-        <h3>Output:</h3>
-        <pre>{output}</pre>
-      </div>
+      <h4 style={{ fontWeight: 'bold', marginLeft: '20px', marginTop: '1px', fontSize: '1.4rem' }}>Code Logic Feedback</h4>
+      <OutputDetails2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
+      
 
       <ToastContainer
         position="top-right"

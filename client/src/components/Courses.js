@@ -239,7 +239,7 @@ function Courses() {
         <button><a href={pPage}>Explore Course</a></button>
       </div>
       </div>
-      <img src="https://images.ctfassets.net/mrop88jh71hl/55rrbZfwMaURHZKAUc5oOW/9e5fe805eb03135b82e962e92169ce6d/python-programming-language.png" alt="me"></img>
+      <img src="https://png.pngitem.com/pimgs/s/31-312064_programming-icon-png-python-logo-512-transparent-png.png" alt="me"></img>
     </div>
 
     <div className="about-me">

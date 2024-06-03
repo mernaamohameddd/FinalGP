@@ -11,9 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { defineTheme } from '../lib/defineTheme';
 import useKeyPress from '../hooks/useKeyPress';
 // import Footer from "./Footer";
-import OutputWindowCPlus from './OutputWindowCPlus';
+import OutputWindow2 from './OutputWindowCPlus';
 import CustomInput from './CustomInput';
-import OutputDetails from './OutputDetails';
+import OutputDetails2 from './OutputDetails2';
 import ThemeDropdown from './ThemeDropdown';
 import LanguagesDropdown from './LanguagesDropdown';
 
@@ -575,20 +575,15 @@ return (
       </div>
 
       <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-        <OutputWindow outputDetails={outputDetails} testCaseResult={testCaseResult} />
+      <OutputWindow2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
 
-        <OutputWindowCPlus outputDetails={outputDetails} testCaseResult={testCaseResult} />
-        <div className="flex flex-col items-end">
-          <CustomInput customInput={customInput} setCustomInput={setCustomInput} />
+<OutputDetails2 outputDetails={outputDetails} testCaseResult={testCaseResult} />
+<div className="flex flex-col items-end">
+          
           <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : 'Analyze with Clang'}</button>
+            <button onClick={handleCPP} disabled={processing}>{processing ? 'Processing...' : ' Compile'}</button>
           </div>
-          <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handleESLINTClick}>Code Style Feedback</button>
-          </div>
-          <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
-            <button onClick={handlePlatoClick}>Analysis Report</button>
-          </div>
+          
           <div>
             <div className={classnames('mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0', !code ? 'opacity-50' : '')}>
               <button onClick={handleTestCasesCPlusPlus}>Check the Logic</button>
