@@ -12,7 +12,6 @@ const OutputWindow2 = ({ outputDetails, testCaseResult, clangAnalysis }) => {
           <pre style={{ margin: '0', height: '100%', whiteSpace: 'pre-wrap' }}>{clangAnalysis}</pre>
         ) : (
           <div style={{ margin: '0' }}>
-            Your Code is Correct, Compilation Successfully
           </div>
         )}
       </div>
