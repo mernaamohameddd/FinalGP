@@ -205,7 +205,7 @@ const sendTocodalyze = async () =>
 //////////////////////////////ESLINT ASYNC FUNCTION///////////////////////////////////
 const handleTestCases = async () => {
   const testCaseResult = await testCasesCheck();
-  console.log(testCaseResult, 'israa test case 2');
+  console.log(testCaseResult, 'test case 2');
   setTestCaseResult(testCaseResult.isSuccess);
 };
 
